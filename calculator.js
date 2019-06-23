@@ -6,7 +6,7 @@ window.onload = function () {
         let key = e.key;
         let keyCode = e.keyCode;
         if (isNaN(key) && keyCode != 13) {
-            if ((isNaN(input.value.charAt(0)) || input.value.charAt(0) == "") && keyCode != 8) {
+            if (((isNaN(input.value.charAt(0)) && input.value.charAt(0) != "-") || input.value.charAt(0) == "") && keyCode != 8) {
                 e.preventDefault();
             }
             if (!symbols.includes(key) && !specialKeys.includes(keyCode)) {
