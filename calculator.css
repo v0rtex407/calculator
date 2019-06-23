@@ -1,0 +1,171 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#text-field {
+  grid-area: text-field;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+input:hover {
+  cursor: default;
+}
+
+#text-field input {
+  border:0;
+  outline:0;
+  background-color: #1594dd;
+  caret-color: #1594dd;
+  text-align: right;
+  font-size:40px;
+  color:black;
+  width:100%;
+  box-sizing: border-box;
+  padding: 0 3% 0 1.3%
+}
+
+::-webkit-input-placeholder {
+  color: black;
+  font-size: 40px;
+  opacity:1
+}
+#text-field input::-moz-placeholder {
+  color: black;
+  font-size: 40px;
+  opacity:1
+}
+:-ms-input-placeholder {
+  color: black;
+  font-size: 40px;
+  opacity:1
+}
+
+#reciprocal {
+  grid-area: reciprocal
+}
+
+#sqroot {
+  grid-area: sqroot
+}
+
+#power {
+  grid-area: power
+}
+
+#log {
+  grid-area: log
+}
+
+#sin {
+  grid-area: sin
+}
+
+#cos {
+  grid-area: cos
+}
+
+#pa-1 {
+  grid-area: pa-1
+}
+
+#pa-2 {
+  grid-area: pa-2
+}
+
+#seven {
+  grid-area: seven
+}
+
+#eight {
+  grid-area: eight
+}
+
+#nine {
+  grid-area: nine
+}
+
+#AC {
+  grid-area: AC
+}
+
+#four {
+  grid-area: four
+}
+
+#five {
+  grid-area: five
+}
+
+#six {
+  grid-area: six
+}
+
+#DEL {
+  grid-area: DEL;
+}
+
+#one {
+  grid-area: one
+}
+
+#two {
+  grid-area: two
+}
+
+#three {
+  grid-area: three
+}
+
+#p-m {
+  grid-area: p-m;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
+}
+
+#zero {
+  grid-area: zero
+}
+
+#dot {
+  grid-area: dot
+}
+
+#equal {
+  grid-area: equal;
+}
+
+#m-d {
+  grid-area: m-d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
+}
+
+#plus,
+#minus,
+#m,
+#d {
+  height: 50%;
+  width: 100%;
+}
+
+.grid-container {
+  display: inline-grid;
+  background-color: #1594dd;
+  grid-template-rows: 120px 40px 40px 80px 80px 80px 80px;
+  grid-template-columns: 80px 80px 80px 80px;
+  grid-template-areas:
+    "text-field text-field text-field text-field"
+    "reciprocal sqroot power log"
+    "sin cos pa-1 pa-2"
+    "seven eight nine AC"
+    "four five six DEL"
+    "one two three p-m"
+    "zero dot equal m-d"
+}
