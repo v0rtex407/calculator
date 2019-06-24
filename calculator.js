@@ -61,7 +61,7 @@ window.onload = function () {
             input.value = input.value.slice(0, input.value.length - 1) + key;
         }
 
-        if (input.value == "NaN" && keyCode != 13 && keyCode != 8) {
+        if (input.value == "NaN" && !isNaN(key)) {
             e.preventDefault();
             input.value = key;
         } else if (keyCode == 8 && input.value == "NaN") {
