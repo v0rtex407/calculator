@@ -48,8 +48,8 @@ window.onload = function () {
 
         if (keyCode == 13) {
             let result = math.evaluate(input.value.replace(/x|X/g, '*').replace(/:|÷/g, '/'))
-            if (!isNaN(result) && result != "Infinity") {
-                   input.value = result;
+            if (!isNaN(result) && result != "Infinity" && result != "-Infinity") {
+                input.value = result;
             } else {
                 e.preventDefault();
                 input.value = "NaN";
@@ -68,6 +68,7 @@ window.onload = function () {
             input.value = 0
         }
     })
+
     document.body.addEventListener("click", (e) => {
         input.focus();
     });
