@@ -48,11 +48,24 @@ window.onload = function () {
 
         if (keyCode == 13) {
             let result = math.evaluate(input.value.replace(/x|X/g, '*').replace(/:|÷/g, '/'))
-            if (result != undefined) {
-                input.value = result;
+            if (!isNaN(result) && result != "Infinity") {
+                   input.value = result;
             } else {
-                input.value = 0;
+                e.preventDefault();
+                input.value = "NaN";
             }
+        }
+
+        if (!isNaN(key) && input.value.charAt(input.value.length - 1) == 0 && isNaN(input.value.charAt(input.value.length - 2))) {
+            e.preventDefault()
+        }
+
+        if (input.value == "NaN" && keyCode != 13 && keyCode != 8) {
+            e.preventDefault();
+            input.value = key;
+        } else if (keyCode == 8 && input.value == "NaN") {
+            e.preventDefault();
+            input.value = 0
         }
     })
     document.body.addEventListener("click", (e) => {
