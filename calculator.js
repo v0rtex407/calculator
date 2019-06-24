@@ -57,7 +57,8 @@ window.onload = function () {
         }
 
         if (!isNaN(key) && input.value.charAt(input.value.length - 1) == 0 && isNaN(input.value.charAt(input.value.length - 2))) {
-            e.preventDefault()
+            e.preventDefault();
+            input.value = input.value.slice(0, input.value.length - 1) + key;
         }
 
         if (input.value == "NaN" && keyCode != 13 && keyCode != 8) {
