@@ -76,7 +76,6 @@ window.onload = function () {
         input.focus();
     }
 
-    document.body.addEventListener("click", clickBody);
 
     const x = window.matchMedia("(max-width: 550px)")
 
