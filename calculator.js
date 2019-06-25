@@ -76,14 +76,14 @@ window.onload = function () {
         input.focus();
     }
 
-    document.body.addEventListener("click", clickBody, true);
+    document.body.addEventListener("click", clickBody);
 
-    const x = window.matchMedia("(max-width: 850px)")
+    const x = window.matchMedia("(max-width: 550px)")
 
     const mobile = (x) => {
         if (x.matches) {
             input.setAttribute("disabled", "");
-            document.body.removeEventListener("click", clickBody, true);
+            document.body.removeEventListener("click", clickBody);
         }
     }
 
