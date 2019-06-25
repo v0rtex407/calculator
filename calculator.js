@@ -78,7 +78,7 @@ window.onload = function () {
 
     document.body.addEventListener("click", clickBody);
 
-    const x = window.matchMedia("(min-width: 550px)")
+    const x = window.matchMedia("(min-width: 600px)")
 
     const mobile = (x) => {
         if (x.matches) {
