@@ -75,4 +75,8 @@ window.onload = function () {
     document.body.addEventListener("click", (e) => {
         input.focus();
     });
+
+    if (window.matchMedia("(max-width:550px)")) {
+        input.setAttribute("disabled", "");
+    }
 }
