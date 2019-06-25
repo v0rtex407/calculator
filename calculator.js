@@ -1,5 +1,5 @@
 window.onload = function () {
-    const input = document.getElementById('input');
+    var input = document.getElementById('input');
     input.addEventListener('keydown', (e) => {
         let symbols = [".", "+", ":", "/", "-", "x", "(", ")", "!", "÷", "X", "*"];
         let specialKeys = [8, 13, 16];
@@ -76,7 +76,13 @@ window.onload = function () {
         input.focus();
     });
 
-    if (window.matchMedia("(max-width: 550px)").match) {
-        input.setAttribute("disabled", "");
+    const x = window.matchMedia("(max-width: 550px)")
+
+    const mobile = (x) => {
+        if (x.matches) {
+            input.setAttribute("disabled", "");
+        }
     }
+
+    x.addListener(mobile)
 }
