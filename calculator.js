@@ -83,7 +83,7 @@ window.onload = function () {
     const mobile = (x) => {
         if (x.matches) {
             input.setAttribute("disabled", "");
-            document.body.removeEventListener("click", clickBody, false)
+            document.body.removeEventListener("click", clickBody, true);
         }
     }
 
