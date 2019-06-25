@@ -84,6 +84,9 @@ window.onload = function () {
         if (x.matches) {
             input.setAttribute("disabled", "");
             document.body.removeEventListener("click", clickBody);
+        } else {
+            document.body.addEventListener("click", clickBody);
+            input.removeAttribute("disabled", "")
         }
     }
 
