@@ -22,7 +22,7 @@ window.onload = function () {
                     e.preventDefault();
                     input.value = input.value.slice(0, (input.value.length - 1)) + "x";
                 }
-            } else if (symbols.includes(key)) {
+            } else if (symbols.includes(key) && input.value != "NaN") {
                 if ([":", "/"].includes(key)) {
                     e.preventDefault();
                     input.value = input.value + "÷";
@@ -30,7 +30,7 @@ window.onload = function () {
                 if (!Number.isInteger(parseFloat(input.value.split("").reverse().join(""))) && key == ".") {
                     e.preventDefault()
                 }
-                if (["*", "X"].includes(key)) {
+                if (["*", "X"].includes(key) && input.value != "NaN") {
                     e.preventDefault();
                     input.value = input.value + "x";
                 } else {
@@ -64,6 +64,8 @@ window.onload = function () {
         if (input.value == "NaN" && !isNaN(key)) {
             e.preventDefault();
             input.value = key;
+        } else if ((isNaN(key) && keyCode != 8 && keyCode != 13) || e.altKey) {
+            e.preventDefault()
         } else if (keyCode == 8 && input.value == "NaN") {
             e.preventDefault();
             input.value = 0
