@@ -76,7 +76,7 @@ window.onload = function () {
         input.focus();
     });
 
-    if (window.matchMedia("(max-width:550px)")) {
+    if (window.matchMedia("(max-width: 550px)").match) {
         input.setAttribute("disabled", "");
     }
 }
