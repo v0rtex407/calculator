@@ -72,11 +72,18 @@ window.onload = function () {
         }
     })
 
+    document.body.addEventListener("click", (e) => {
+        input.focus();
+    });
+
     const x = window.matchMedia("(max-width: 550px)")
 
     const mobile = (x) => {
         if (x.matches) {
             input.setAttribute("disabled", "");
+            document.body.removeEventListener("click", (e) => {
+                input.focus();
+            })
         }
     }
 
