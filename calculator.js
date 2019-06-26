@@ -77,7 +77,7 @@ window.onload = function () {
     }
 
     function blurInput() {
-        input.blur()
+        input.focus() = input.blur()
     }
 
     window.addEventListener("click", clickBody);
