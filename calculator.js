@@ -76,6 +76,10 @@ window.onload = function () {
         input.focus();
     }
 
+    function blurInput() {
+        input.blur()
+    }
+
     window.addEventListener("click", clickBody);
 
     const x = window.matchMedia("(min-width: 600px)")
@@ -85,12 +89,14 @@ window.onload = function () {
             input.removeAttribute("disabled", "")
             window.addEventListener("click", clickBody, true);
             input.setAttribute("autofocus", "");
-            input.removeAttribute("readonly", "")
+            input.removeAttribute("readonly", "");
+            input.removeEventListener("focus", blurInput)
         } else {
             window.removeEventListener("click", clickBody, true);
             input.setAttribute("disabled", "");
             input.removeAttribute("autofocus", "");
-            input.setAttribute("readonly", "")
+            input.setAttribute("readonly", "");
+            input.addEventListener("focus", blurInput)
         }
     }
 
