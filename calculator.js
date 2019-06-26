@@ -76,17 +76,19 @@ window.onload = function () {
         input.focus();
     }
 
-    document.body.addEventListener("click", clickBody);
+    window.addEventListener("click", clickBody);
 
     const x = window.matchMedia("(min-width: 600px)")
 
     const mobile = (x) => {
         if (x.matches) {
             input.removeAttribute("disabled", "")
-            document.body.addEventListener("click", clickBody);
+            window.addEventListener("click", clickBody, true);
+            input.setAttribute("autofocus", "")
         } else {
-            document.body.removeEventListener("click", clickBody);
-            input.setAttribute("disabled", "")
+            window.removeEventListener("click", clickBody, true);
+            input.setAttribute("disabled", "");
+            input.removeAttribute("autofocus", "")
         }
     }
 
