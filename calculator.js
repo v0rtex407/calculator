@@ -84,11 +84,13 @@ window.onload = function () {
         if (x.matches) {
             input.removeAttribute("disabled", "")
             window.addEventListener("click", clickBody, true);
-            input.setAttribute("autofocus", "")
+            input.setAttribute("autofocus", "");
+            input.removeAttribute("readonly", "")
         } else {
             window.removeEventListener("click", clickBody, true);
             input.setAttribute("disabled", "");
-            input.removeAttribute("autofocus", "")
+            input.removeAttribute("autofocus", "");
+            input.setAttribute("readonly", "")
         }
     }
 
