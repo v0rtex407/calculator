@@ -159,7 +159,8 @@ body {
   display: inline-grid;
   background-color: #1594dd;
   width:320px;
-  grid-template-rows: 120px 40px 40px 80px 80px 80px 80px;
+  height: 520px;
+  grid-template-rows: 23.07% 7.69% 7.69% 15.38% 15.38% 15.38% 15.38%;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-areas:
     "text-field text-field text-field text-field"
