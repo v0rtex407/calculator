@@ -74,7 +74,6 @@ window.onload = function () {
         document.getElementById("grid-container").style.width= "100vw";
         document.getElementById("grid-container").style.height= "100%";
         document.getElementById("grid-container").style.border= "0";
-        document.getElementById("grid-container").style.border= "0";
         document.getElementById("container").style.height= "100%";
         document.getElementById("container").style.display= "block";
         document.getElementById("grid-container").style.position= "fixed";
