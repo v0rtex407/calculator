@@ -71,9 +71,8 @@ window.onload = function () {
     window.addEventListener("keydown", backspacePressed, true);
     const m = window.matchMedia("(max-width: 550px)");
     if (m.matches) {
-        document.body.style.removeProperty("background-color");
         document.getElementById("grid-container").style.width= "100vw";
-        document.getElementById("grid-container").style.height= "100vh";
+        document.getElementById("grid-container").style.height= "100%";
         document.getElementById("grid-container").style.position= "fixed";
         document.getElementById("grid-container").style.overflow= "hidden";
         document.getElementById("welcome").style.display = "none";
