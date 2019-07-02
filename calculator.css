@@ -177,5 +177,6 @@ body {
   button {
     border-radius:0;
     border:1px #adadad solid;
-    outline:1px #1594dd solid
+    outline:1px #1594dd solid;
+    background-color: #f0f0f0;
   }
