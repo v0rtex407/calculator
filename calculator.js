@@ -69,4 +69,8 @@ window.onload = function () {
     }
     document.body.addEventListener("keydown", insertKey, true);
     window.addEventListener("keydown", backspacePressed, true);
+    let mobile = window.matchMedia("(max-width:550px)");
+    if (mobile.matches) {
+        document.getElementById("grid-container").style.width = "100vw"
+    }
 }

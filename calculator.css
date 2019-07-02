@@ -154,11 +154,12 @@ h1 {
   width: 100%;
 }
 
-.grid-container {
+#grid-container {
   display: inline-grid;
   background-color: #1594dd;
+  width:320px;
   grid-template-rows: 120px 40px 40px 80px 80px 80px 80px;
-  grid-template-columns: 80px 80px 80px 80px;
+  grid-template-columns: 25% 25% 25% 25%;
   grid-template-areas:
     "text-field text-field text-field text-field"
     "reciprocal sqroot power log"
