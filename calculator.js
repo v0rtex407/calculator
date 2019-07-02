@@ -75,8 +75,8 @@ window.onload = function () {
         document.getElementById("grid-container").style.height= "100%";
         document.getElementById("container").style.height= "100%";
         document.getElementById("container").style.display= "block";
+        document.getElementById("grid-container").style.border= "0";
         document.getElementById("grid-container").style.position= "fixed";
-        document.getElementById("grid-container").style.overflow= "hidden";
         document.getElementById("welcome").style.display = "none";
         document.body.style.backgroundColor = "#1594dd";
     } 
