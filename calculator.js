@@ -78,6 +78,6 @@ window.onload = function () {
         document.getElementById("grid-container").style.position= "fixed";
         document.getElementById("grid-container").style.overflow= "hidden";
         document.getElementById("welcome").style.display = "none";
-        document.body.style.backgroundColor("#1594dd");
+        document.body.style.backgroundColor = "#1594dd";
     } 
 }
