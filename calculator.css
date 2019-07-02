@@ -124,7 +124,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  box-sizing: border-box
 }
 
 #zero {
@@ -144,7 +145,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  box-sizing: border-box
 }
 
 #plus,
