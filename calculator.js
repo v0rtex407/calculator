@@ -69,7 +69,7 @@ window.onload = function () {
     }
     document.body.addEventListener("keydown", insertKey, true);
     window.addEventListener("keydown", backspacePressed, true);
-    const m = window.matchMedia("(max-width: 550px)");
+    const m = window.matchMedia("(max-width: 1000px)");
     if (m.matches) {
         document.getElementById("grid-container").style.width= "100vw";
         document.getElementById("grid-container").style.height= "100%";
