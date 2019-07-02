@@ -73,10 +73,6 @@ window.onload = function () {
     if (m.matches) {
         document.getElementById("grid-container").style.width= "100vw";
         document.getElementById("grid-container").style.height= "100%";
-        document.getElementById("plus").style.height= "45%";
-        document.getElementById("minus").style.height= "45%";
-        document.getElementById("m").style.height= "45%";
-        document.getElementById("d").style.height= "45%";
         document.getElementById("grid-container").style.border= "0";
         document.getElementById("grid-container").style.border= "0";
         document.getElementById("container").style.height= "100%";
