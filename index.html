@@ -4,20 +4,18 @@
     <link rel="stylesheet" href="calculator.css" type="text/css">
     <script src="calculator.js"></script>
     <meta name="description" content="math.js | basic usage">
-    <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
+    <script src="math.js"></script>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <meta name="HandheldFriendly" content="true">
 
-
 </head>
 
 <body>
     <div class="grid-container">
-        <div id="text-field"><input type="text" id="input" autofocus value="0" autocomplete="off"
-                oncontextmenu="return false" onclick="return false"></div>
+        <div id="text-field"><span id="display">0</span></div>
         <button onclick="" id="reciprocal">x</button>
         <button onclick="sqroot()" id="sqroot">√x</button>
         <button onclick="power()" id="power">x</button>

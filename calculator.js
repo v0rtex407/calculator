@@ -1,104 +1,68 @@
 window.onload = function () {
-    var input = document.getElementById('input');
-    input.addEventListener('keydown', (e) => {
-        let symbols = [".", "+", ":", "/", "-", "x", "(", ")", "!", "÷", "X", "*"];
-        let specialKeys = [8, 13, 16];
+    let display = document.getElementById("display");
+    display.innerHTML = display.innerHTML.split("").reverse().join("")
+    const insertKey = (e) => {
         let key = e.key;
-        let keyCode = e.keyCode;
-        if (isNaN(key) && keyCode != 13) {
-            if (((isNaN(input.value.charAt(0)) && input.value.charAt(0) != "-") || input.value.charAt(0) == "") && keyCode != 8) {
-                e.preventDefault();
-            }
-            if (!symbols.includes(key) && !specialKeys.includes(keyCode)) {
-                e.preventDefault();
-            } else if (symbols.includes(input.value.charAt(input.value.length - 1)) && symbols.includes(key)) {
-                e.preventDefault();
-                input.value = input.value.slice(0, (input.value.length - 1)) + key;
-                if ([":", "/"].includes(key)) {
-                    e.preventDefault();
-                    input.value = input.value.slice(0, (input.value.length - 1)) + "÷";
-                }
-                if (["*", "X"].includes(key)) {
-                    e.preventDefault();
-                    input.value = input.value.slice(0, (input.value.length - 1)) + "x";
-                }
-            } else if (symbols.includes(key) && input.value != "NaN") {
-                if ([":", "/"].includes(key)) {
-                    e.preventDefault();
-                    input.value = input.value + "÷";
-                }
-                if (!Number.isInteger(parseFloat(input.value.split("").reverse().join(""))) && key == ".") {
-                    e.preventDefault()
-                }
-                if (["*", "X"].includes(key) && input.value != "NaN") {
-                    e.preventDefault();
-                    input.value = input.value + "x";
-                } else {
-                    return true
-                }
-            } else if (keyCode == 8 && input.value.length == 1) {
-                e.preventDefault();
-                input.value = 0;
-            }
-
-        } else if (!isNaN(key) && input.value == 0) {
-            e.preventDefault();
-            input.value = key;
+        let code = e.keyCode;
+        let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+        let symbols = [".", "=", "+", "-", "*", "÷", "x", "X", ":", "/"];
+        let parentheses = ["(", ")"];
+        let rmsymbols = ["X", "*"];
+        let rdsymbols = ["/", ":"];
+        if ((display.innerHTML == 0 || display.innerHTML == "NaN") && (!isNaN(key) || parentheses.includes(key) || key == "-")) {
+            display.innerHTML = "";
         }
-
-        if (keyCode == 13) {
-            let result = math.evaluate(input.value.replace(/x|X/g, '*').replace(/:|÷/g, '/'))
-            if (!isNaN(result) && result != "Infinity" && result != "-Infinity") {
-                input.value = result;
+        if (symbols.includes(key) && (!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && display.innerHTML != "NaN") {
+            if (rmsymbols.includes(key)) {
+                e.preventDefault();
+                display.innerHTML += "x";
+            } else if (rdsymbols.includes(key)) {
+                e.preventDefault();
+                display.innerHTML += "÷";
+            } else if (key == "." && !parseFloat(display.innerHTML.split("").reverse().join("")).toString().includes(".")) {
+                display.innerHTML += ".";
+            } else if (key != ".") {
+                display.innerHTML += key;
+            }
+        }
+        if (numbers.includes(key)) {
+            if (display.innerHTML.charAt(display.innerHTML.length - 1) == 0 && isNaN(display.innerHTML.charAt(display.innerHTML.length - 2)) && display.innerHTML.charAt(display.innerHTML.length - 2) != ".") {
+                display.innerHTML = display.innerHTML.slice(0, display.innerHTML.length - 1) + key;
             } else {
-                e.preventDefault();
-                input.value = "NaN";
+                display.innerHTML += key
+            }
+        }
+        if (parentheses.includes(key)) {
+            if (key == "(") {
+                display.innerHTML = display.innerHTML + key
+            } else if (key == ")") {
+                if (!symbols.includes(display.innerHTML.charAt(display.innerHTML.length - 1)) && display.innerHTML.charAt(display.innerHTML.length - 1) != "(") {
+                    display.innerHTML = display.innerHTML + key
+                }
+            }
+        }
+        if (code == 8) {
+            if (display.innerHTML.length == 1) {
+                display.innerHTML = 0
+            } else if (display.innerHTML == "NaN") {
+                display.innerHTML = 0;
+            } else {
+                display.innerHTML = display.innerHTML.slice(0, display.innerHTML.length - 1);
             }
         }
 
-        if (!isNaN(key) && input.value.charAt(input.value.length - 1) == 0 && isNaN(input.value.charAt(input.value.length - 2))) {
-            e.preventDefault();
-            input.value = input.value.slice(0, input.value.length - 1) + key;
-        }
-
-        if (input.value == "NaN" && !isNaN(key)) {
-            e.preventDefault();
-            input.value = key;
-        } else if ((isNaN(key) && keyCode != 8 && keyCode != 13) || e.altKey) {
-            e.preventDefault()
-        } else if (keyCode == 8 && input.value == "NaN") {
-            e.preventDefault();
-            input.value = 0
-        }
-    })
-
-    function clickBody() {
-        input.focus();
-    }
-
-    function blurInput() {
-        input.focus() = input.blur()
-    }
-
-    window.addEventListener("click", clickBody);
-
-    const x = window.matchMedia("(min-width: 600px)")
-
-    const mobile = (x) => {
-        if (x.matches) {
-            input.removeAttribute("disabled", "")
-            window.addEventListener("click", clickBody, true);
-            input.setAttribute("autofocus", "");
-            input.removeAttribute("readonly", "");
-            input.removeEventListener("focus", blurInput)
-        } else {
-            window.removeEventListener("click", clickBody, true);
-            input.setAttribute("disabled", "");
-            input.removeAttribute("autofocus", "");
-            input.setAttribute("readonly", "");
-            input.addEventListener("focus", blurInput)
+        try {
+            if (code == 13) {
+                let result = math.evaluate(display.innerHTML.replace(/\[|{/g, '(').replace(/}|]/g, ')').replace(/x/g, '*').replace(/÷/g, '/'))
+                if (result == "Infinity" || result == "-Infinity") {
+                    display.innerHTML = "NaN"
+                } else {
+                    display.innerHTML = result
+                }
+            }
+        } catch (e) {
+            if (display.innerHTML != "-") display.innerHTML = "NaN";
         }
     }
-
-    x.addListener(mobile)
+    window.addEventListener("keydown", insertKey, true)
 }
