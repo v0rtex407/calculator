@@ -73,6 +73,7 @@ window.onload = function () {
     if (m.matches) {
         document.getElementById("grid-container").style.width= "100vw";
         document.getElementById("grid-container").style.height= "100vh";
+        document.getElementById("grid-container").style.position= "fixed";
         document.getElementById("welcome").style.display = "none";
     } 
 }
