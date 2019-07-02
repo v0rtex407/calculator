@@ -64,5 +64,9 @@ window.onload = function () {
             if (display.innerHTML != "-") display.innerHTML = "NaN";
         }
     }
-    window.addEventListener("keydown", insertKey, true)
+    const backspacePressed = (e) => {
+        e.preventDefault()
+    }
+    document.body.addEventListener("keydown", insertKey, true);
+    window.addEventListener("keydown", backspacePressed, true);
 }
