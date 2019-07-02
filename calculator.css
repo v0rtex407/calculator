@@ -155,7 +155,6 @@ body {
 #d {
   height: 50%;
   width: 100%;
-  box-sizing: border-box;
 }
 
 #grid-container {
@@ -181,5 +180,12 @@ body {
     border-radius:0;
     border:1px #adadad solid;
     background-color: #f0f0f0;
-    height: 45%;
   }
+  
+#plus,
+#minus,
+#m,
+#d {
+  height: 45%;
+  width: 100%;
+}
