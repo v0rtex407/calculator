@@ -71,7 +71,8 @@ window.onload = function () {
     window.addEventListener("keydown", backspacePressed, true);
     const m = window.matchMedia("(max-width: 550px)");
     if (m.matches) {
-        document.getElementById("grid-container").style.backgroundColor= "black";
+        document.getElementById("grid-container").style.width= "100vw";
+        document.getElementById("grid-container").style.height= "100vh";
         document.getElementById("welcome").style.display = "none";
     } 
 }
