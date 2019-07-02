@@ -172,3 +172,10 @@ body {
     "zero dot equal m-d";
   border: 1px #1594dd solid
 }
+
+@media screen and (max-width: 1000px) {
+  button {
+    border-radius:0;
+    border:1px #adadad solid;
+    outline:1px #1594dd solid
+  }
