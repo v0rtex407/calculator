@@ -123,7 +123,7 @@ body {
   grid-area: p-m;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   box-sizing: border-box
 }
@@ -144,7 +144,7 @@ body {
   grid-area: m-d;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   box-sizing: border-box
 }
@@ -192,5 +192,4 @@ body {
 #p-m, #m-d {
   height: 100%;
   box-sizing: border-box;
-  padding: 2%
   }
