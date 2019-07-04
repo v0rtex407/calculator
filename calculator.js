@@ -165,12 +165,15 @@ function result() {
 
 function sqroot(clicked) {
     zero(clicked);
+    if (!isNaN(display.innerHTML)) {
+        display.innerHTML = "√(" + display.innerHTML;
+    } else {
     display.innerHTML = display.innerHTML + "√(";
-}
+}}
 
 
 function dot(clicked) {
-    if (!parseFloat(display.innerHTML.split("").reverse().join("")).toString().includes(".") && display.innerHTML != "0.") {
+    if (!parseFloat(display.innerHTML.split("").reverse().join("")).toString().includes(".") && display.innerHTML != "0." && display.innerHTML != "NaN") {
         zero(clicked);
         display.innerHTML = display.innerHTML + ".";
     }
