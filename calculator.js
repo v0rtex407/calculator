@@ -56,6 +56,10 @@ window.onload = function () {
                 let result = math.evaluate(display.innerHTML.replace(/\[|{/g, '(').replace(/}|]/g, ')').replace(/x/g, '*').replace(/÷/g, '/').replace(/√/g, "sqrt"))
                 if (result == "Infinity" || result == "-Infinity") {
                     display.innerHTML = "NaN"
+                }  else if (result.toString().includes(".") && !result.toString().includes("i")) {
+                    display.innerHTML = result.toString().slice(0, 14)
+                } else if (result.toString().includes(".") && result.toString().includes("i")) {
+                    display.innerHTML = result.toString().slice(0, 14) + "i"
                 } else {
                     display.innerHTML = result
                 }
@@ -142,11 +146,15 @@ function nought(clicked) {
     display.innerHTML = display.innerHTML + 0;
 }
 
-function result(clicked) {
+function result() {
     try {
             let result = math.evaluate(display.innerHTML.replace(/\[|{/g, '(').replace(/}|]/g, ')').replace(/x/g, '*').replace(/÷/g, '/').replace(/√/g, "sqrt"))
             if (result == "Infinity" || result == "-Infinity") {
                 display.innerHTML = "NaN"
+            } else if (result.toString().includes(".") && !result.toString().includes("i")) {
+                display.innerHTML = result.toString().slice(0, 14)
+            } else if (result.toString().includes(".") && result.toString().includes("i")) {
+                display.innerHTML = result.toString().slice(0, 14) + "i"
             } else {
                 display.innerHTML = result
             }
@@ -157,7 +165,7 @@ function result(clicked) {
 
 function sqroot(clicked) {
     zero(clicked);
-    display.innerHTML = display.innerHTML + "√";
+    display.innerHTML = display.innerHTML + "√(";
 }
 
 
