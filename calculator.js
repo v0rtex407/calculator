@@ -1,234 +1,116 @@
-window.onload = function () {
-    var display = document.getElementById("display");
-    const insertKey = (e) => {
-        let key = e.key;
-        let code = e.keyCode;
-        let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-        let symbols = [".", "=", "+", "-", "*", "÷", "x", "X", ":", "/"];
-        let operations = ["+", "-", "x", "÷"];
-        let parentheses = ["(", ")"];
-        let rmsymbols = ["X", "*"];
-        let rdsymbols = ["/", ":"];
-        if ((display.innerHTML == "0" || display.innerHTML == "NaN") && (!isNaN(key) || key == "(" || key == "-")) {
-            display.innerHTML = "";
-        }
-        if (symbols.includes(key) && (!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && display.innerHTML != "NaN") {
-            if (rmsymbols.includes(key)) {
-                e.preventDefault();
-                display.innerHTML += "x";
-            } else if (rdsymbols.includes(key)) {
-                e.preventDefault();
-                display.innerHTML += "÷";
-            } else if (key == "." && !parseFloat(display.innerHTML.split("").reverse().join("")).toString().includes(".")) {
-                display.innerHTML += ".";
-            } else if (key != ".") {
-                display.innerHTML += key;
-            }
-        }
-        if (numbers.includes(key)) {
-            if (display.innerHTML.charAt(display.innerHTML.length - 1) == 0 && isNaN(display.innerHTML.charAt(display.innerHTML.length - 2)) && display.innerHTML.charAt(display.innerHTML.length - 2) != ".") {
-                display.innerHTML = display.innerHTML.slice(0, display.innerHTML.length - 1) + key;
-            } else {
-                display.innerHTML += key
-            }
-        }
-        if (parentheses.includes(key)) {
-            if (key == "(") {
-                display.innerHTML = display.innerHTML + key
-            } else if (key == ")") {
-                if (!symbols.includes(display.innerHTML.charAt(display.innerHTML.length - 1)) && display.innerHTML.charAt(display.innerHTML.length - 1) != "(") {
-                    display.innerHTML = display.innerHTML + key
-                }
-            }
-        }
-        if (code == 8) {
-            if (display.innerHTML.length == 1) {
-                display.innerHTML = 0
-            } else if (display.innerHTML == "NaN") {
-                display.innerHTML = 0;
-            } else {
-                display.innerHTML = display.innerHTML.slice(0, display.innerHTML.length - 1);
-            }
-        }
-
+window.onload = function() {
+    var a = document.getElementById("display");
+    document.body.addEventListener("keydown", b => {
+        let c = b.key,
+            d = b.keyCode,
+            e = [".", "=", "+", "-", "*", "\xF7", "x", "X", ":", "/"],
+            f = ["(", ")"];
+        "0" != a.innerHTML && "NaN" != a.innerHTML || isNaN(c) && "(" != c && "-" != c || (a.innerHTML = ""), e.includes(c) && (!isNaN(a.innerHTML.charAt(a.innerHTML.length - 1)) || f.includes(a.innerHTML.charAt(a.innerHTML.length - 1))) && "NaN" != a.innerHTML && (["X", "*"].includes(c) ? (b.preventDefault(), a.innerHTML += "x") : ["/", ":"].includes(c) ? (b.preventDefault(), a.innerHTML += "\xF7") : "." != c || parseFloat(a.innerHTML.split("").reverse().join("")).toString().includes(".") ? "." != c && (a.innerHTML += c) : a.innerHTML += "."), ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].includes(c) && (0 == a.innerHTML.charAt(a.innerHTML.length - 1) && isNaN(a.innerHTML.charAt(a.innerHTML.length - 2)) && "." != a.innerHTML.charAt(a.innerHTML.length - 2) ? a.innerHTML = a.innerHTML.slice(0, a.innerHTML.length - 1) + c : a.innerHTML += c), f.includes(c) && ("(" == c ? a.innerHTML += c : ")" == c && !e.includes(a.innerHTML.charAt(a.innerHTML.length - 1)) && "(" != a.innerHTML.charAt(a.innerHTML.length - 1) && (a.innerHTML += c)), 8 == d && (1 == a.innerHTML.length ? a.innerHTML = 0 : "NaN" == a.innerHTML ? a.innerHTML = 0 : a.innerHTML = a.innerHTML.slice(0, a.innerHTML.length - 1));
         try {
-            if (code == 13) {
-                let result = math.evaluate(display.innerHTML.replace(/\[|{/g, '(').replace(/}|]/g, ')').replace(/x/g, '*').replace(/÷/g, '/').replace(/√/g, "sqrt"))
-                if (result == "Infinity" || result == "-Infinity") {
-                    display.innerHTML = "NaN"
-                }  else if (result.toString().includes(".") && !result.toString().includes("i")) {
-                    display.innerHTML = result.toString().slice(0, 14)
-                } else if (result.toString().includes(".") && result.toString().includes("i")) {
-                    display.innerHTML = result.toString().slice(0, 14) + "i"
-                } else {
-                    display.innerHTML = result
-                }
+            if (13 == d) {
+                let b = math.evaluate(a.innerHTML.replace(/\[|{/g, "(").replace(/}|]/g, ")").replace(/x/g, "*").replace(/÷/g, "/").replace(/√/g, "sqrt"));
+                a.innerHTML = "Infinity" == b || "-Infinity" == b ? "NaN" : b.toString().includes(".") && !b.toString().includes("i") ? b.toString().slice(0, 14) : b.toString().includes(".") && b.toString().includes("i") ? b.toString().slice(0, 14) + "i" : b
             }
-        } catch (e) {
-            if (display.innerHTML != "-") display.innerHTML = "NaN";
+        } catch (b) {
+            "-" != a.innerHTML && (a.innerHTML = "NaN")
         }
-    }
-    const backspacePressed = (e) => {
-        e.preventDefault()
-    }
-    document.body.addEventListener("keydown", insertKey, true);
-    window.addEventListener("keydown", backspacePressed, true);
-    const m = window.matchMedia("(max-width: 1000px)");
-    if (m.matches) {
-        document.getElementById("grid-container").style.width = "100vw";
-        document.getElementById("grid-container").style.height = "100%";
-        document.getElementById("grid-container").style.border = "0";
-        document.getElementById("grid-container").style.border = "0";
-        document.getElementById("container").style.height = "100%";
-        document.getElementById("container").style.display = "block";
-        document.getElementById("grid-container").style.position = "fixed";
-        document.getElementById("welcome").style.display = "none";
-        document.body.style.backgroundColor = "#1594dd";
-    }
-
-}
-
+    }, !0), window.addEventListener("keydown", a => {
+        a.preventDefault()
+    }, !0);
+    const b = window.matchMedia("(max-width: 1000px)");
+    b.matches && (document.getElementById("grid-container").style.width = "100vw", document.getElementById("grid-container").style.height = "100%", document.getElementById("grid-container").style.border = "0", document.getElementById("grid-container").style.border = "0", document.getElementById("container").style.height = "100%", document.getElementById("container").style.display = "block", document.getElementById("grid-container").style.position = "fixed", document.getElementById("welcome").style.display = "none", document.body.style.backgroundColor = "#1594dd")
+};
 let parentheses = ["(", ")"];
 
-function zero(clicked) {
-    if ((display.innerHTML == "0" || display.innerHTML == "NaN") && (!isNaN(clicked) || clicked == "(" || clicked == "-" || clicked == "√x")) {
-        display.innerHTML = "";
-    }
+function zero(a) {
+    "0" != display.innerHTML && "NaN" != display.innerHTML || isNaN(a) && "(" != a && "-" != a && "\u221Ax" != a || (display.innerHTML = "")
 }
 
-function one(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 1;
+function one(a) {
+    zero(a), ++display.innerHTML
 }
 
-function two(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 2;
+function two(a) {
+    zero(a), display.innerHTML += 2
 }
 
-function three(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 3;
+function three(a) {
+    zero(a), display.innerHTML += 3
 }
 
-function four(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 4;
+function four(a) {
+    zero(a), display.innerHTML += 4
 }
 
-function five(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 5;
+function five(a) {
+    zero(a), display.innerHTML += 5
 }
 
-function six(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 6;
+function six(a) {
+    zero(a), display.innerHTML += 6
 }
 
-function seven(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 7;
+function seven(a) {
+    zero(a), display.innerHTML += 7
 }
 
-function eight(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 8;
+function eight(a) {
+    zero(a), display.innerHTML += 8
 }
 
-function nine(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 9;
+function nine(a) {
+    zero(a), display.innerHTML += 9
 }
 
-function nought(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + 0;
+function nought(a) {
+    zero(a), display.innerHTML += 0
 }
 
 function result() {
     try {
-            let result = math.evaluate(display.innerHTML.replace(/\[|{/g, '(').replace(/}|]/g, ')').replace(/x/g, '*').replace(/÷/g, '/').replace(/√/g, "sqrt"))
-            if (result == "Infinity" || result == "-Infinity") {
-                display.innerHTML = "NaN"
-            } else if (result.toString().includes(".") && !result.toString().includes("i")) {
-                display.innerHTML = result.toString().slice(0, 14)
-            } else if (result.toString().includes(".") && result.toString().includes("i")) {
-                display.innerHTML = result.toString().slice(0, 14) + "i"
-            } else {
-                display.innerHTML = result
-            }
-        } catch (e) {
-        if (display.innerHTML != "-") display.innerHTML = "NaN";
+        let a = math.evaluate(display.innerHTML.replace(/\[|{/g, "(").replace(/}|]/g, ")").replace(/x/g, "*").replace(/÷/g, "/").replace(/√/g, "sqrt"));
+        display.innerHTML = "Infinity" == a || "-Infinity" == a ? "NaN" : a.toString().includes(".") && !a.toString().includes("i") ? a.toString().slice(0, 14) : a.toString().includes(".") && a.toString().includes("i") ? a.toString().slice(0, 14) + "i" : a
+    } catch (a) {
+        "-" != display.innerHTML && (display.innerHTML = "NaN")
     }
 }
 
-function sqroot(clicked) {
-    zero(clicked);
-    if (!isNaN(display.innerHTML)) {
-        display.innerHTML = "√(" + display.innerHTML;
-    } else {
-    display.innerHTML = display.innerHTML + "√(";
-}}
-
-
-function dot(clicked) {
-    if (!parseFloat(display.innerHTML.split("").reverse().join("")).toString().includes(".") && display.innerHTML != "0." && display.innerHTML != "NaN") {
-        zero(clicked);
-        display.innerHTML = display.innerHTML + ".";
-    }
+function sqroot(a) {
+    zero(a), isNaN(display.innerHTML) ? display.innerHTML += "\u221A(" : display.innerHTML = "\u221A(" + display.innerHTML
 }
 
-function mi(clicked) {
-    if ((!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1)))) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + "-";
-}
+function dot(a) {
+    parseFloat(display.innerHTML.split("").reverse().join("")).toString().includes(".") || "0." == display.innerHTML || "NaN" == display.innerHTML || (zero(a), display.innerHTML += ".")
 }
 
-function pl(clicked) {
-    if ((!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && display.innerHTML != "NaN") {
-        zero(clicked);
-        display.innerHTML = display.innerHTML + "+";
-    }
+function mi(a) {
+    (!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && (zero(a), display.innerHTML += "-")
 }
 
-function mu(clicked) {
-    if ((!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && display.innerHTML != "NaN") {
-        zero(clicked);
-        display.innerHTML = display.innerHTML + "x";
-    }
+function pl(a) {
+    (!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && "NaN" != display.innerHTML && (zero(a), display.innerHTML += "+")
 }
 
-function di(clicked) {
-    if ((!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && display.innerHTML != "NaN") {
-        zero(clicked);
-        display.innerHTML = display.innerHTML + "÷";
-    }
+function mu(a) {
+    (!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && "NaN" != display.innerHTML && (zero(a), display.innerHTML += "x")
+}
+
+function di(a) {
+    (!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && "NaN" != display.innerHTML && (zero(a), display.innerHTML += "\xF7")
 }
 
 function del() {
-    if (display.innerHTML.length == 1) {
-        display.innerHTML = 0
-    } else if (display.innerHTML == "NaN") {
-        display.innerHTML = 0;
-    } else {
-        display.innerHTML = display.innerHTML.slice(0, display.innerHTML.length - 1);
-    }
+    display.innerHTML = 1 == display.innerHTML.length ? 0 : "NaN" == display.innerHTML ? 0 : display.innerHTML.slice(0, display.innerHTML.length - 1)
 }
 
 function reset() {
     display.innerHTML = "0"
 }
 
-function pa2(clicked) {
-    if ((!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && display.innerHTML.charAt(display.innerHTML.length - 1) != "(" && display.innerHTML != "NaN" && display.innerHTML != "0") {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + ")";
-}
+function pa2(a) {
+    (!isNaN(display.innerHTML.charAt(display.innerHTML.length - 1)) || parentheses.includes(display.innerHTML.charAt(display.innerHTML.length - 1))) && "(" != display.innerHTML.charAt(display.innerHTML.length - 1) && "NaN" != display.innerHTML && "0" != display.innerHTML && (zero(a), display.innerHTML += ")")
 }
 
-function pa1(clicked) {
-    zero(clicked);
-    display.innerHTML = display.innerHTML + "(";
+function pa1(a) {
+    zero(a), display.innerHTML += "("
 }
