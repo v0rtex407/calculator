@@ -5,6 +5,10 @@ body {
   background-color: #b9c9ff
 }
 
+button {
+  touch-action: manipulation;
+}
+
 #welcome {
   font-size: 27px;
   display:block;
